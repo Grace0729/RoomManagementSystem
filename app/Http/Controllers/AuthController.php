@@ -13,7 +13,8 @@ class AuthController extends Controller
         $validator = validator($request->all(), [
             "name" => "required|unique:users,name",
             "email" => "required|email|unique:users,email",
-            "password" => "required|confirmed"
+            "password" => "required|confirmed",
+            "role" => "sometimes|in:user,scheduler,admin",
         ]);
 
         if($validator->fails()){

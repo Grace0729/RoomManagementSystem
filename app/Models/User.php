@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
 
     /**
@@ -21,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Ensure the 'role' attribute is fillable for assigning user roles
     ];
 
     /**
@@ -42,7 +42,16 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed', // Ensures password is hashed automatically
         ];
+    }
+
+    /**
+     * Define a relationship between User and Death (if applicable).
+     * This assumes that a user can have many death requests associated with them.
+     */
+    public function deaths()
+    {
+        return $this->hasMany(Death::class); // This assumes the Death model has a user_id field
     }
 }
