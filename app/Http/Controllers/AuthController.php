@@ -101,5 +101,31 @@ class AuthController extends Controller
         ], 404);
         
     }
+    // user1 = start =  nov 11  approved
+    // user2 = start =  nov 11 rejected
 
+    /**
+     * Check token if it is valid
+     */
+    public function checkToken(Request $request){
+        return response()->json([
+            "ok" => true,
+            "message"=>"User info has been retrieved",
+            "data"=> $request->user()
+        ], 200);
+    }
+
+
+    /**
+     * logout user
+     */
+
+    public function logout(Request $request){
+        $request->user()->token()->revoke();
+        return response()->json([
+            "ok" => true,
+            "message"=>"User has been logged out",
+            "data"=> null
+        ], 200);
+    }
 }

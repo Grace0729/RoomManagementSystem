@@ -18,7 +18,7 @@ use App\Http\Controllers\DeathController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/users', [AuthController::class, 'index']);
 Route::post('/search', [AuthController::class, 'search']);
-
+Route::post('/check-token', [AuthController::class, 'checkToken']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:api'])->group(function () {
