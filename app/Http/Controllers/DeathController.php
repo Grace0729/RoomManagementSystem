@@ -35,7 +35,7 @@ class DeathController extends Controller
         }
 
         
-        if ($user->role === 'admin') {
+        if ($user->role == 'admin') {
             $death = Death::create($validator->validated()); 
 
             return response()->json([
